@@ -1,9 +1,9 @@
-/* ============================================================
-   BalitGroup — Style Sheet
-   Theme: Dark Luxury · Oak Green · Glassmorphism
-   ============================================================ */
+/* ================================================================
+   Balit — Premium Design System
+   Dark Luxury · Blue / Purple / Cyan · Glassmorphism · Motion
+   ================================================================ */
 
-/* ---------- Reset & Base ---------- */
+/* ---------- Reset ---------- */
 *, ::before, ::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
@@ -14,45 +14,99 @@ html {
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: #080C0A;
-  color: rgba(255, 255, 255, 0.85);
+  background: #07080A;
+  color: rgba(255,255,255,0.85);
   overflow-x: hidden;
 }
 
-::selection {
-  background: rgba(45, 74, 42, 0.6);
-  color: #fff;
-}
+::selection { background: rgba(59,130,246,0.3); color: #fff; }
 
 /* ---------- Scrollbar ---------- */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #080C0A; }
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.15); }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #07080A; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.12); }
 
-/* ============================================================
-   HEADER — Glassmorphism Navigation
-   ============================================================ */
+/* ===============================================================
+   NOISE OVERLAY
+   =============================================================== */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ===============================================================
+   AURORA BACKGROUNDS
+   =============================================================== */
+.aurora {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(120px);
+  will-change: transform;
+}
+
+.aurora-1 {
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(59,130,246,0.12), transparent 70%);
+  top: -15%; left: -10%;
+  animation: auroraDrift 30s ease-in-out infinite alternate;
+}
+
+.aurora-2 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(139,92,246,0.08), transparent 70%);
+  bottom: -10%; right: -5%;
+  animation: auroraDrift 35s ease-in-out infinite alternate-reverse;
+}
+
+.aurora-3 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(6,182,212,0.06), transparent 70%);
+  top: 40%; left: 50%;
+  animation: auroraDrift 25s ease-in-out infinite alternate;
+}
+
+@keyframes auroraDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(80px, -50px) scale(1.2); }
+}
+
+/* ===============================================================
+   CANVAS
+   =============================================================== */
+#bg-canvas {
+  z-index: -1;
+}
+
+/* ===============================================================
+   HEADER — Glassmorphism
+   =============================================================== */
 #navbar {
-  background: rgba(8, 12, 10, 0.5);
-  backdrop-filter: blur(20px) saturate(1.2);
-  -webkit-backdrop-filter: blur(20px) saturate(1.2);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  transition: background 0.5s ease, box-shadow 0.5s ease;
+  background: rgba(7,8,10,0.4);
+  backdrop-filter: blur(24px) saturate(1.3);
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
 #navbar.scrolled {
-  background: rgba(8, 12, 10, 0.85);
-  box-shadow: 0 1px 30px rgba(0, 0, 0, 0.4);
+  background: rgba(7,8,10,0.85);
+  box-shadow: 0 1px 40px rgba(0,0,0,0.5);
 }
 
 .nav-link {
   position: relative;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255,255,255,0.45);
   transition: color 0.3s ease;
+  font-size: 0.8125rem;
+  letter-spacing: 0.01em;
 }
 
 .nav-link::after {
@@ -62,31 +116,41 @@ body {
   left: 0;
   width: 0;
   height: 1.5px;
-  background: #4ADE80;
-  transition: width 0.3s ease;
+  background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+  transition: width 0.4s cubic-bezier(0.16,1,0.3,1);
   border-radius: 2px;
 }
 
-.nav-link:hover {
-  color: rgba(255, 255, 255, 0.85);
+.nav-link:hover { color: rgba(255,255,255,0.85); }
+.nav-link:hover::after { width: 100%; }
+
+/* ---------- Language Toggle ---------- */
+.lang-btn {
+  color: rgba(255,255,255,0.4);
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.03);
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.12em;
 }
 
-.nav-link:hover::after {
-  width: 100%;
+.lang-btn:hover {
+  color: rgba(255,255,255,0.8);
+  border-color: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
 }
 
-/* Mobile menu */
+/* ---------- Mobile Menu ---------- */
 #mobile-menu {
-  background: rgba(8, 12, 10, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  transition: all 0.3s ease;
+  background: rgba(7,8,10,0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
 #mobile-menu.open {
   display: block;
-  animation: slideDown 0.3s ease forwards;
+  animation: slideDown 0.35s cubic-bezier(0.16,1,0.3,1) forwards;
 }
 
 @keyframes slideDown {
@@ -94,190 +158,186 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ============================================================
-   HERO SECTION
-   ============================================================ */
+/* ===============================================================
+   LOGO
+   =============================================================== */
+.logo-svg {
+  transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+
+#logo-link:hover .logo-svg {
+  transform: scale(1.1) rotate(-2deg);
+}
+
+.logo-node-lit {
+  fill: #3B82F6 !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 6px rgba(59,130,246,0.7)) !important;
+  transition: all 0.15s ease;
+}
+
+html[dir="rtl"] #logo-link:hover .logo-svg {
+  transform: scale(1.1) rotate(2deg);
+}
+
+.logo-text {
+  letter-spacing: -0.03em;
+}
+
+/* ===============================================================
+   HERO
+   =============================================================== */
 #hero {
-  background-color: #080C0A;
+  background: #07080A;
 }
 
-/* ---------- Gradient Orbs ---------- */
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.3;
+/* ---------- Hero Entries ---------- */
+.hero-badge {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s forwards;
 }
 
-.orb-1 {
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(45, 74, 42, 0.4), transparent 70%);
-  top: -200px;
-  right: -150px;
-  animation: orbFloat 20s ease-in-out infinite alternate;
-}
-
-.orb-2 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(74, 222, 128, 0.08), transparent 70%);
-  bottom: -150px;
-  left: -100px;
-  animation: orbFloat 25s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes orbFloat {
-  0%   { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(60px, -40px) scale(1.15); }
-}
-
-/* ---------- Hero Typography ---------- */
 .hero-headline {
   opacity: 0;
   transform: translateY(30px);
-  animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s forwards;
 }
 
 .hero-sub {
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+  animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.4s forwards;
 }
 
 .hero-ctas {
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards;
+  animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.55s forwards;
 }
 
 .hero-stats {
   opacity: 0;
-  animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+  animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.7s forwards;
 }
 
 @keyframes fadeUp {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Scroll pulse */
+/* ---------- Scroll Pulse ---------- */
 @keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(1); }
-  50%      { opacity: 1;   transform: scaleY(1.4); }
+  0%,100% { opacity: 0.25; transform: scaleY(1); }
+  50%     { opacity: 1;    transform: scaleY(1.5); }
 }
 .animate-scroll-pulse {
-  animation: scrollPulse 2s ease-in-out infinite;
+  animation: scrollPulse 2.5s ease-in-out infinite;
 }
 
-/* ============================================================
-   MOUNTAIN MESH SVG
-   ============================================================ */
-#mountain-container svg {
-  width: 100%;
-  height: 100%;
+/* ===============================================================
+   MAGNETIC BUTTONS
+   =============================================================== */
+.magnetic-btn {
+  position: relative;
+  transition: transform 0.15s cubic-bezier(0.16,1,0.3,1),
+              box-shadow 0.3s ease;
+  will-change: transform;
 }
 
-.mesh-line {
-  stroke: rgba(74, 222, 128, 0.12);
-  stroke-width: 0.8;
-  fill: none;
+/* ===============================================================
+   CONCEPT CARDS
+   =============================================================== */
+.concept-card {
+  cursor: default;
 }
 
-.mesh-line-bright {
-  stroke: rgba(74, 222, 128, 0.2);
-  stroke-width: 1.2;
-  fill: none;
+/* ===============================================================
+   PROMPT CARDS
+   =============================================================== */
+.prompt-card {
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.4s ease, border-color 0.4s ease;
 }
 
-.mesh-node {
-  fill: rgba(74, 222, 128, 0.4);
-  transition: opacity 0.3s ease;
+.prompt-card:hover {
+  background: rgba(255,255,255,0.035);
+  border-color: rgba(255,255,255,0.08);
 }
 
-.mesh-node-peak {
-  fill: #4ADE80;
-  filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.5));
-  transform-origin: center;
-  animation: nodePulse 3s ease-in-out infinite;
+/* ===============================================================
+   REVEAL ANIMATIONS
+   =============================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1),
+              transform 0.8s cubic-bezier(0.16,1,0.3,1);
 }
 
-@keyframes nodePulse {
-  0%, 100% { opacity: 0.6; transform: scale(0.85); }
-  50%      { opacity: 1;   transform: scale(1.25); }
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Neural particles */
-.neural-particle {
-  fill: rgba(74, 222, 128, 0.25);
-  animation: particleDrift 12s ease-in-out infinite;
+/* ===============================================================
+   RTL PERSIAN SUPPORT
+   =============================================================== */
+html[dir="rtl"] {
+  font-family: 'Vazirmatn', 'Inter', system-ui, sans-serif;
 }
 
-.neural-particle:nth-child(odd) {
-  animation-duration: 15s;
-  animation-delay: -3s;
+html[dir="rtl"] .nav-link::after {
+  left: auto;
+  right: 0;
 }
 
-.neural-particle:nth-child(3n) {
-  animation-duration: 18s;
-  animation-delay: -6s;
+html[dir="rtl"] .hero-ctas .group svg:first-child {
+  transform: scaleX(-1);
 }
 
-@keyframes particleDrift {
-  0%, 100% {
-    opacity: 0;
-    transform: translate(0, 0);
-  }
-  20% {
-    opacity: 0.6;
-  }
-  80% {
-    opacity: 0.4;
-  }
-  100% {
-    opacity: 0;
-    transform: translate(var(--dx, 30px), var(--dy, -40px));
-  }
+html[dir="rtl"] .hero-ctas .group:hover svg {
+  transform: translateX(-4px) scaleX(-1) !important;
 }
 
-/* Brand outline */
-.mesh-outline {
-  stroke: rgba(74, 222, 128, 0.08);
-  stroke-width: 1;
-  fill: none;
+html[dir="rtl"] .group-hover\:translate-x-1:hover svg {
+  transform: translateX(-0.25rem) !important;
 }
 
-/* ============================================================
+html[dir="rtl"] .magnetic-btn .group-hover\:translate-x-1 {
+  --tw-translate-x: -0.25rem;
+}
+
+/* Adjust badge dot */
+html[dir="rtl"] .hero-badge {
+  flex-direction: row;
+}
+
+/* ===============================================================
    RESPONSIVE
-   ============================================================ */
+   =============================================================== */
 @media (max-width: 640px) {
-  .hero-headline {
-    font-size: 2.25rem;
-  }
-  .orb-1 {
-    width: 350px;
-    height: 350px;
-    top: -100px;
-    right: -100px;
-  }
-  .orb-2 {
-    width: 300px;
-    height: 300px;
-  }
+  .hero-headline { font-size: 2.5rem; }
+  .aurora-1 { width: 400px; height: 400px; }
+  .aurora-2 { width: 350px; height: 350px; }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-  .hero-headline {
-    font-size: 3.75rem;
-  }
+@media (max-width: 1023px) {
+  #cursor-dot, #cursor-ring { display: none !important; }
 }
 
-/* ---------- Reduced Motion ---------- */
+/* ===============================================================
+   REDUCED MOTION
+   =============================================================== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  .aurora { animation: none !important; }
+  #bg-canvas { display: none; }
+  .reveal { opacity: 1; transform: none; }
 }
